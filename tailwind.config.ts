@@ -9,9 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "darkblueh":"#125BB6",
         "darkblue": "#0A3871",
         "txtazulb": "#343A40",
         "bgazul": "#F3F5FC",
+        "bgazulh":"#D7E0FF",
         "bgwhite": "#FFF",
         "graytxt": "#495057"
       },
