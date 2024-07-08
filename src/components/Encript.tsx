@@ -24,8 +24,9 @@ line-height: 150%; /* 24px */
 
 const PreEncript = () => {
     return(
-        <div className="flex flex-col items-center lg:gap-8 p-8 rounded-[32px] bg-white
-        shadow-boxsh">
+       <div className="w-full">
+         <div className="w-full flex flex-col items-center lg:gap-8 p-8 rounded-[32px] bg-white
+        shadow-boxsh ">
               <div className="">
                     <Image 
                     src={'/avatar.svg'} 
@@ -42,6 +43,7 @@ const PreEncript = () => {
                         Ingresa el texto que desees encriptar o desencriptar.</h3>
               </div>  
         </div>
+       </div>
     )
 }   
 
