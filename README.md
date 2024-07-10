@@ -1,4 +1,4 @@
-
+![oracle next education AND alura](public/portada.png)
 
 # Challengue encriptador por Andrés R.W. 
 
