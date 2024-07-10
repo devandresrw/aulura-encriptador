@@ -63,9 +63,9 @@ const CopyEncrip = () => {
     }
     return(
         <>
-        <div className="w-full lg:h-full">
+        <div className="w-full lg:h-full ">
             <div className="w-full flex flex-col items-center lg:gap-8 p-8 rounded-[32px] bg-white
-        shadow-boxsh lg:h-full lg:justify-center">
+        shadow-boxsh lg:h-full lg:justify-center lg:min-w-96">
                     <h1>{store.textEncript}</h1>
                     <button onClick={copiarTexto} 
                     className="font-inter font-normal text-base
