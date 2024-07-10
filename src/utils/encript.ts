@@ -1,26 +1,13 @@
-import { 
-    randomBytes, 
-    createCipheriv, 
-    scryptSync } from "crypto";
+import {createCipheriv } from 'crypto'
+import { iv, clave } from './seed'
 
-interface Encript{
-    texto: string;
-    seed: string; 
-}
+interface Cifrado {
+    texto:string 
+} 
 
-export function EncriptarText({texto, seed}: Encript): string{
-    const iv = randomBytes(16);
-    // Ajustar la clave a 32 bytes usando scryptSync
-    const clave = scryptSync(seed, 'salt', 32); // 'salt' puede ser reemplazado por un valor único para cada usuario o sesión si es posible
+export function cifradoTexto({texto}: Cifrado): string {
     const cipher = createCipheriv('aes-256-cbc', clave, iv);
-    let resultado = cipher.update(texto, 'utf8', 'hex');
-    resultado += cipher.final('hex');
-    return iv.toString('hex') + ':' + resultado;
+    let cifrado = cipher.update(texto, 'utf-8', 'hex');
+    cifrado += cipher.final('hex');
+    return cifrado;
 }
-
-/* Pruebas
-const a = EncriptarText({texto: 'Hola', seed: '123'});
-console.log(a);
-*/
-
-

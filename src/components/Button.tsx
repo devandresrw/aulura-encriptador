@@ -3,10 +3,13 @@ import clsx from "clsx"
 interface ButtonProps {
     text?: string
     typebtn?: 'enviar' | 'encript' | 'copy' | 'disabled'
+    name: string
+    event?: (event: any) => void
     onClick?: (event: any) => void
+    type?: "submit" | "button"
 }
 
-export default function ButtonAction({typebtn, onClick, text}: ButtonProps){
+export default function ButtonAction({typebtn, event, text, type}: ButtonProps){
     return(
         <>
         <button className={clsx(`font-inter font-normal text-base
@@ -17,9 +20,10 @@ export default function ButtonAction({typebtn, onClick, text}: ButtonProps){
                 [`border-darkblue text-darkblue hover:bg-bgazulh`]: typebtn === "encript",
                 [`border-darkblue text-darkblue hover:bg-darkblue hover:text-white`]: typebtn === "copy"
             }
-        )} onClick={onClick} type="submit">
+        )} onClick={event} type="submit">
             {text}
         </button>
         </>
+
     )
 }

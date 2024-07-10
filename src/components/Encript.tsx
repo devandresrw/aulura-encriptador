@@ -1,11 +1,19 @@
 'use client'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
+import { useStateTextEncript } from "@/src/utils/useStore"
 
 export default function Encript(){
     const [viewpre, setViewPre] = useState(true)
+    const store = useStateTextEncript((state)=>state)
+
+    useEffect(()=>{
+        const storeVacio = Object.keys(store.textEncript).length === 0
+        setViewPre(storeVacio) 
+    },[store])
+
     return(
-        <div className="">
+        <div className="w-full lg:h-full">
               {
                 viewpre ? <PreEncript/> : <CopyEncrip/> 
               }  
@@ -13,25 +21,17 @@ export default function Encript(){
     ) 
 }
 
-/*
-color: var(--Gray-gray-400, #495057);
-text-align: center;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%; /* 24px */
 
 const PreEncript = () => {
     return(
-       <div className="w-full">
+       <div className="w-full lg:h-full">
          <div className="w-full flex flex-col items-center lg:gap-8 p-8 rounded-[32px] bg-white
-        shadow-boxsh ">
+        shadow-boxsh lg:h-full lg:justify-center">
               <div className="">
                     <Image 
                     src={'/avatar.svg'} 
-                    height={100} 
-                    width={100} 
+                    height={300} 
+                    width={300} 
                     alt={'avatar-alura'}
                     className="hidden lg:block"
                     />
@@ -48,7 +48,34 @@ const PreEncript = () => {
 }   
 
 const CopyEncrip = () => {
+    const [textoBoton, setTextoBoton] = useState('Copiar')
+    const store = useStateTextEncript((state)=>state)
+
+    const copiarTexto = async()=>{
+        try{
+            await navigator.clipboard.writeText(store.textEncript);
+            setTextoBoton('Copiado!')
+            setTimeout(() => setTextoBoton('Copiar'), 2000)
+        }catch(error){
+            console.error('Error al copiar el texto: ', error);
+            alert('Error al copiar el texto');
+        }
+    }
     return(
-        <></>
+        <>
+        <div className="w-full lg:h-full">
+            <div className="w-full flex flex-col items-center lg:gap-8 p-8 rounded-[32px] bg-white
+        shadow-boxsh lg:h-full lg:justify-center">
+                    <h1>{store.textEncript}</h1>
+                    <button onClick={copiarTexto} 
+                    className="font-inter font-normal text-base
+                                p-6 flex text-center justify-center align-middle rounded-3xl 
+                                border border-solid transition-all duration-200 ease-in-out
+                              border-darkblue text-darkblue hover:bg-bgazulh">
+                        {textoBoton}
+                    </button>
+            </div>
+        </div>
+        </>
     )
 }
